@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+ROOT_PATH = os.path.dirname(os.path.realpath(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,14 +30,19 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = (
+PROJECT_APPS = [
+    'testpyproject.news',
+    'testpyproject.python_game'
+]
+
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-)
+]+PROJECT_APPS
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -52,16 +58,31 @@ ROOT_URLCONF = 'testpyproject.urls'
 
 WSGI_APPLICATION = 'testpyproject.wsgi.application'
 
+SESSION_COOKIE_DOMAIN = None
+SESSION_COOKIE_NAME = "tpp_local_session_id"
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
+"""
+CREATE DATABASE testprdb CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE USER 'testuser'@localhost IDENTIFIED BY 'testuser';
+GRANT ALL PRIVILEGES ON `testprdb`.* TO `testuser`@`localhost`;
+"""
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'testprdb',
+        'USER': 'testuser',
+        'PASSWORD': 'testuser',
+        'HOST': '',
+        'PORT': '3306',
     }
 }
+
+TEMPLATE_DIRS = (
+    "%s/%s/" % (ROOT_PATH, 'templates'),
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
