@@ -1,5 +1,4 @@
 <ul id="menu">
-    <li class="{% if request.path_info == "/" %}selected{% endif %}"><a href="/">Home</a></li>
     <li class="{% if request.resolver_match.url_name == "news_page" %}selected{% endif %}"><a href="{% url 'news_page' %}">News</a></li>
     <li class="{% if request.resolver_match.url_name == "statistics_page" %}selected{% endif %}"><a href="{% url 'statistics_page' %}">Statistic</a></li>
     {% if user.is_authenticated %}
