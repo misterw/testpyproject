@@ -1,0 +1,34 @@
+{% extends "index.html" %}
+    {% block style %}
+        {% load static from staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/snake.css" %}" title="style" />
+    {% endblock %}
+    {% block scripts %}
+        {% load static from staticfiles %}
+        <script type="text/javascript">
+            var setScoreUrl = "{% url 'save_result' %}";
+        </script>
+        <script type="text/javascript" src="{% static "js/snake.js" %}"></script>
+    {% endblock %}
+    {% block sidebar %}
+        <div class="sidebar">
+            <h3>{{ user.username }}</h3>
+            <p>User Statistic</p>
+            <ul id="game_result_info">
+              <li>Total games: <span class="count_of_games">{{ statistic.count_of_games }}</span></li>
+              <li>Best score: <span class="best_score">{{ statistic.best_score }}</span></li>
+              <li>Last score: <span class="last_score">{{ statistic.last_score }}</span></li>
+            </ul>
+        </div>
+    {% endblock %}
+    {% block content-top %}
+        <div id="game-area" tabindex="0"></div>
+        <script type="text/javascript">
+            var mySnakeBoard = new SNAKE.Board(  {
+                boardContainer: "game-area",
+                width: "600",
+                height: "500",
+                snakeSpeed: "200"
+            });
+        </script>
+    {% endblock %}

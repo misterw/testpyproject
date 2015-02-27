@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+def news_page(request):
+    pass
+
+def simple_news_page(request, news_id):
+    pass

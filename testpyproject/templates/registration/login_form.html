@@ -1,0 +1,23 @@
+{% if form.errors %}
+<p class="error">Please correct the errors below:</p>
+{% endif %}
+
+<form method="post" action={% url 'login' %}>{% csrf_token %}
+	<dl>
+		<dt>
+			{% if form.username.errors %}
+                <ul class="errorlist"><li>{{ form.username.errors|join:", " }}</li></ul>
+			{% endif %}
+		</dt>
+		<dd>User name: {{ form.username }}</dd>
+		<dt>
+			{% if form.password.errors %}
+				 <ul class="errorlist"><li>{{ form.password.errors|join:", " }}</li></ul>
+			{% endif %}
+		</dt>
+		<dd>Password: {{ form.password }}</dd>
+
+		<dt><button class="blue-btn" name="login" type="submit">Sign in</button></dt>
+	</dl>
+</form>
+

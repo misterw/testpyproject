@@ -1,0 +1,9 @@
+<h3>Login</h3>
+<form method="post" action={% url 'login' %}>{% csrf_token %}
+    <dl>
+		<dd>User name: <input id="id_username" maxlength="254" name="username" type="text"></dd>
+		<dd>Password: <input id="id_password" name="password" type="password"></dd>
+		<dt><button class="blue-btn" name="login" type="submit">Sign in</button></dt>
+	</dl>
+</form>
+
