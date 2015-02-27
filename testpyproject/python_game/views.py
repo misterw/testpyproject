@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from testpyproject.python_game.models import PythonGameResult
 from django.db.models import Max
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def register(request):
@@ -34,7 +35,20 @@ def profile_page(request):
 
 
 def statistic_page(request):
-    pass
+    statistic_list = PythonGameResult.objects.order_by('score').reverse().all()
+    paginator = Paginator(statistic_list, 20)
+
+    page_num = request.GET.get('page')
+    try:
+        statistics = paginator.page(page_num)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        statistics = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        statistics = paginator.page(paginator.num_pages)
+
+    return render(request, "python_game/statistic.html", {'statistics': statistics})
 
 
 @csrf_exempt
@@ -53,8 +67,15 @@ def save_result(request):
 
 
 def _get_user_statistic(user):
-    return {
-        'best_score': user.results.aggregate(Max('score'))['score__max'],
-        'last_score': user.results.latest('id').score,
-        'count_of_games': user.results.count()
-    }
+    if user.results.count():
+        return {
+            'best_score': user.results.aggregate(Max('score'))['score__max'],
+            'last_score': user.results.latest('id').score,
+            'count_of_games': user.results.count()
+        }
+    else:
+        return {
+            'best_score': 0,
+            'last_score': 0,
+            'count_of_games': 0
+        }

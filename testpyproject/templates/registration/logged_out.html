@@ -1,0 +1,7 @@
+{% extends "index.html" %}
+
+{% block title %}Logged out{% endblock %}
+{% block content-top %}
+<h1>You've been logged out.</h1>
+<p>Thanks for your game; when you come back, don't forget to <a href="{% url 'login' %}">log in</a> again.</p>
+{% endblock %}

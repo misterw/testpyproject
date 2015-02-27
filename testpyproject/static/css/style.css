@@ -312,3 +312,33 @@ table tr td
 .content .helptext{
     display: block;
 }
+
+#site_content .statistic{
+    font-size: 14px;
+    margin: 20px 10px;
+}
+
+#site_content .statistic .row{
+    margin-bottom: 10px;
+}
+#site_content .statistic .row.header{
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+#site_content .statistic .row span{
+    display: inline-block;
+}
+#site_content .statistic .row span.item_num{
+    width: 65px;
+}
+#site_content .statistic .row span.user_name{
+    width: 208px;
+}
+#site_content .statistic .row span.date{
+    width: 160px;
+}
+#site_content .statistic .row span.score{
+    width: 60px;
+    text-align: center;
+}

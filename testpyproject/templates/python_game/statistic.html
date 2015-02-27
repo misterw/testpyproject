@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+{% block content-top %}
+    <div class="statistic">
+        <div class="row header">
+            <span class="item_num">PLACE</span>
+            <span class="user_name">USER NAME</span>
+            <span class="date">DATE</span>
+            <span class="score">SCORE</span>
+        </div>
+        {% for statistic in statistics %}
+            {# Each "contact" is a Contact model object. #}
+            <div class="row">
+                <span class="item_num">{{forloop.counter}}.</span>
+                <span class="user_name">{{ statistic.user.username|upper }}</span>
+                <span class="date">{{ statistic.game_date|date:"M d, Y" }}</span>
+                <span class="score">{{ statistic.score }}</span>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="pagination">
+        <span class="step-links">
+            {% if statistics.has_previous %}
+                <a href="?page={{ statistics.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ statistics.number }} of {{ statistics.paginator.num_pages }}.
+            </span>
+
+            {% if statistics.has_next %}
+                <a href="?page={{ statistics.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

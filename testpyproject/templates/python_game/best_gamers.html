@@ -1,0 +1,6 @@
+<h3>Leads of PG</h3>
+{% for gamer in gamers %}
+    <h4>{{ gamer.user.username }} {{ forloop.counter }} place</h4>
+    <div>Score: {{ gamer.score }}</div>
+    <h5>{{ gamer.game_date|date:"M d, Y" }}</h5>
+{% endfor %}
