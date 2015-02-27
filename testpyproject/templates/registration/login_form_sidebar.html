@@ -1,5 +1,5 @@
 <h3>Login</h3>
-<form method="post" action={% url 'login' %}>{% csrf_token %}
+<form method="post" action="{% url 'login' %}?next={% url 'profile_page' %}">{% csrf_token %}
     <dl>
 		<dd>User name: <input id="id_username" maxlength="254" name="username" type="text"></dd>
 		<dd>Password: <input id="id_password" name="password" type="password"></dd>
