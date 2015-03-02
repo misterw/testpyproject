@@ -1,10 +1,9 @@
-from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http import Http404, HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import Http404, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from testpyproject.python_game.models import PythonGameResult
