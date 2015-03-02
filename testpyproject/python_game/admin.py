@@ -26,9 +26,10 @@ class PythonGameAdmin(admin.ModelAdmin):
 
     def user_link(self, instance):
         url = reverse('admin:%s_%s_change' % ('auth', 'user'), args=(instance.user_id,))
-        return '<a href="%s" target="_blank">%s</a>' % (url, instance.user_id)
+        return '<a href="%s" target="_blank">%s</a>' % (url, instance.user.username)
     user_link.allow_tags = True
     user_link.admin_order_field = 'user__id'
+    user_link.short_description = 'User'
 
 
 admin.site.register(PythonGameResult, PythonGameAdmin)
